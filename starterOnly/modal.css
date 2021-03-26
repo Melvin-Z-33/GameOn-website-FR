@@ -463,7 +463,7 @@ input[data-error]::after {
   z-index: 1;
 }
 .hero-headline {
-  font-size: 6rem;
+  font-size: 5.1rem;
   font-weight: normal;
   white-space: nowrap;
 /* ****** ajout*** */
@@ -537,8 +537,6 @@ footer {
   .hero-headline {
     font-size: 3.5rem;
     text-align: center;
-    color: blue;
-
   }
 }
 /* ****************** */
