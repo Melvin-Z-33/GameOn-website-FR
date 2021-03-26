@@ -33,6 +33,11 @@ img {
 .topnav {
   overflow: hidden;
   margin: 3.5%;
+
+  /* ***  AJOUT   *** */
+  display:flex;
+  align-content: center;
+  justify-content: space-between;
 }
 .header-logo {
     float: left;
@@ -91,13 +96,21 @@ img {
 }
 
 
+/* **** AJOUT ***** */
+@media screen and (max-width: 539px) {
+  .topnav a {display: none;}
+  .topnav a.icon {
+  margin-top:0px;
+  }
+}
+
 
  @media screen and (max-width: 540px) {
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
+    margin-top: 7px;
   }
 } 
 
@@ -419,9 +432,23 @@ input[data-error]::after {
   background: #232323;
   color: #fff;
   position: relative;
-  text-align: left;
-  min-width: 424px;
+  /* text-align: left;
+  min-width: 424px; */
+  text-align: center;
+  min-width: 300px;
 }
+/* ********** ajout */
+@media screen and (max-width: 400px) {
+
+  .hero-content {
+
+    min-width: 272px;
+  }
+}
+
+/* ********** */
+
+
 .hero-content::after {
   content: "";
   width: 100%;
@@ -439,6 +466,10 @@ input[data-error]::after {
   font-size: 6rem;
   font-weight: normal;
   white-space: nowrap;
+/* ****** ajout*** */
+text-align: center;
+
+/* ******* */
 }
 .hero-text {
   width: 146%;
@@ -498,6 +529,19 @@ footer {
     font-size: 4.5rem;
     white-space: normal;
   }
+
+
+/* *******  AJOUT ****** */
+
+@media screen and (max-width: 400px) {
+  .hero-headline {
+    font-size: 3.5rem;
+    text-align: center;
+    color: blue;
+
+  }
+}
+/* ****************** */
   .hero-text {
     width: unset;
     font-size: 1.5rem;
