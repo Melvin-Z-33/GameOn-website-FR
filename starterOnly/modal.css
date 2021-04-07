@@ -44,6 +44,8 @@ img {
 }
 .main-navbar {
     float: right;
+    width:88vw;
+    margin-top:22px;
 }
 .topnav a {
   float: left;
@@ -76,13 +78,15 @@ img {
 @media screen and (max-width: 768px) {
   .topnav a {display: none;}
   .topnav a.icon {
-    float: right;
+    /* float: right; */
     display: block;
+    position: absolute;
+    right:4.8%;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .topnav.responsive {position: relative;}
+  .topnav.responsive {position: relative; display: grid;}
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
@@ -91,7 +95,7 @@ img {
   .topnav.responsive a {
     float: none;
     display: block;
-    text-align: left;
+    text-align: center;
   }
 }
 
@@ -112,7 +116,11 @@ img {
     display: block;
     margin-top: 7px;
   }
-} 
+  /* position: absolute;
+  right: 15px;
+  top: 14px; */
+}
+
 
 main {
   font-size: 130%;
