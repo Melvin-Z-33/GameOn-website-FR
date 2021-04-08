@@ -30,6 +30,16 @@ img {
   padding-right: 1rem;
 }
 
+
+.text-success{
+  color:green;
+}
+
+.text-failed{
+  color:red;
+}
+
+
 .topnav {
   overflow: hidden;
   margin: 3.5%;

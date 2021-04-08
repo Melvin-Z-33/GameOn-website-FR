@@ -48,35 +48,54 @@ const LastName = document.getElementById('last');
 
 
 
-// Ecoute de l'Email
-let formReserve = document.querySelector('#formReservation'); //Recuperer le formulaire pour pouvoir y ajouter des methodes et agir sur les inputs
-  
+   
 
-formReserve.email.addEventListener('change', function(){
-  validEmail(this);
-});
+
+
+
+
 
 // ******** Validation Email *********/
 
-const validEmail = function(inputEmail) {
+ const validEmail = function(inputEmail) {
+
   // Recuperation de la balisse  small
-  let small = inputEmail.nextElementSibling;
+  let email = document.getElementById('email');
+  let small = email.nextElementSibling;
+
   //Regex pour valider Email
   let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g');
+ 
+  let testEmail =  emailRegExp.test(inputEmail.value);
   // Test Regex
-  let testEmail = emailRegExp.test(inputEmail.value);
+  
   if (testEmail) {
-    console.log(true);
-    return true;
+      small.innerHTML = 'L\'adresse électronique est valide.';
+      small.classList.remove('text-failed');
+      small.classList.add('text-success');
+
   }
   else
   {
-    console.log(false);
-    small.innerHTML = 'Adresse Non Valide';
-    return false
+    small.innerHTML ='L\'adresse électronique n \'est pas valide.';
+    small.classList.remove('text-success');
+    small.classList.add('text-failed');
   }
 };
 
+
+
+//  Ecoute de l'Email
+let form = document.querySelector('#formReservation'); //Recuperer le formulaire pour pouvoir y ajouter des methodes et agir sur les inputs
+ form.email.addEventListener('change', function(){
+   validEmail(this);
+ });
+
+
+// button.addEventListener('click',function(){
+//   let test = email.value;
+//   alert(test)
+// });     
 
 
 
