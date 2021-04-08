@@ -23,20 +23,13 @@ function launchModal() {
 }
 
 
-// //  Message validation du prenom
-// const inputFirstName = document.getElementById('first');
-// inputFirstName.setCustomValidity('ok');
-const isValidFirstname =  first.checkValidity();
-
-if(isValidFirstname){
-  console.log('ok');
-}else {
-  console.log('restart')
-}
 
 
-// Message validation du nom
-const LastName = document.getElementById('last');
+let modalClose = document.getElementById('fermer');
+modalClose.addEventListener('click', function(){
+
+  modalbg.style.display = "none";
+  });
 
 
 
@@ -44,18 +37,7 @@ const LastName = document.getElementById('last');
 
 
 
-
-
-
-
-   
-
-
-
-
-
-
-// ******** Validation Email *********/
+/******** Validation Email *********/
 
  const validEmail = function(inputEmail) {
 
@@ -65,31 +47,30 @@ const LastName = document.getElementById('last');
 
   //Regex pour valider Email
   let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g');
- 
+
   let testEmail =  emailRegExp.test(inputEmail.value);
   // Test Regex
-  
   if (testEmail) {
       small.innerHTML = 'L\'adresse électronique est valide.';
       small.classList.remove('text-failed');
       small.classList.add('text-success');
-
-  }
-  else
-  {
+    } else {
     small.innerHTML ='L\'adresse électronique n \'est pas valide.';
     small.classList.remove('text-success');
     small.classList.add('text-failed');
   }
 };
 
-
-
 //  Ecoute de l'Email
 let form = document.querySelector('#formReservation'); //Recuperer le formulaire pour pouvoir y ajouter des methodes et agir sur les inputs
  form.email.addEventListener('change', function(){
-   validEmail(this);
- });
+    validEmail(this);
+    });
+
+
+
+
+
 
 
 // button.addEventListener('click',function(){
