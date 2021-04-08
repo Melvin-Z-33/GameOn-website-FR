@@ -23,9 +23,17 @@ function launchModal() {
 }
 
 
-//  Message validation du prenom
-const inputFirstName = document.getElementById('first');
-inputFirstName.setCustomValidity('ok');
+// //  Message validation du prenom
+// const inputFirstName = document.getElementById('first');
+// inputFirstName.setCustomValidity('ok');
+const isValidFirstname =  first.checkValidity();
+
+if(isValidFirstname){
+  console.log('ok');
+}else {
+  console.log('restart')
+}
+
 
 // Message validation du nom
 const LastName = document.getElementById('last');
