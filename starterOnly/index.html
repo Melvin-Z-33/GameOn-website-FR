@@ -52,7 +52,7 @@
             
             <form
               name="reserve"
-              id="formReservation"
+              id="form"
               action="index.html"
               method="get"
              onsubmit="return validate();"
@@ -67,6 +67,7 @@
                   name="first"
                   minlength="2"
                   pattern="[A-Za-z0-9]+"
+                  value=''
                   required
                 />
                 <br>
@@ -81,6 +82,7 @@
                   name="last"
                   minlength="2"
                   pattern="[A-Za-z0-9]+"
+                  value
                   required
                 /><br>
               </div>
@@ -190,9 +192,10 @@
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
+                  required
                   checked
                 />
-                <label class="checkbox2-label" for="checkbox1" required>
+                <label class="checkbox2-label" for="checkbox1" >
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
@@ -210,7 +213,6 @@
                 class="button"
                 value="C'est parti"
                 id="buttonSubmit"
-                disabled
                 
               />
             </form>

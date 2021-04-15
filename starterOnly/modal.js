@@ -25,53 +25,42 @@ modalClose.addEventListener('click', function () {
 	modalbg.style.display = 'none';
 });
 
-const form = document.querySelector('#formReservation'); //Recuperer le formulaire pour pouvoir y ajouter des methodes et agir sur les inputs
-const first = document.getElementById('first');
-const last = document.getElementById('last');
+const firstName = document.getElementById('first');
+const lastName = document.getElementById('last');
 const email = document.getElementById('email');
-const birthdatez = document.getElementById('birthdate');
-const quantity = document.getElementById('quantity');
+const birthday = document.getElementById('birthdate');
+const buttonSubmit = document.getElementById('buttonSubmit');
 const checkbox1 = document.getElementById('checkbox1');
-let buttonSubmit = document.getElementById('buttonSubmit');
 
-const isFirstValid = first.checkValidity();
-const isLastValid = last.checkValidity();
-const isEmailValid = email.checkValidity();
-const isBirthdatez = birthdatez.checkValidity();
-const isQuantity = quantity.checkValidity();
-const isValidCheckBox = checkbox1.checkValidity();
-const isValidDate = birthdatez.checkValidity();
+//******* Verification du Nom *****************/
+function isLastNameValid() {
+	let inputLastName = document.getElementById('last').value;
 
-//*** first **********************/
-
-const validityFirst = () => {
-	if (!isFirstValid == true) {
-		buttonSubmit.disabled = false;
-		first.setCustomValidity('rentrer un nom correct');
-		alert('05');
+	if (inputLastName.length < 2) {
+		lastName.setCustomValidity(
+			'Veuillez entrer 2 caractères ou plus pour le champ du nom.',
+		);
+		return false;
 	} else {
-		buttonSubmit.disabled = true;
-		first.setCustomValidity('ok');
+		return true;
 	}
-};
+}
 
-form.first.addEventListener('keyup', function () {
-	validityFirst(this);
-});
+lastName.addEventListener('change', isLastNameValid);
 
-// ******** Validation Email *********/
+//******************* Verification de l'email  ****************/
+
 const validEmail = (inputEmail) => {
 	// Recuperation de la balisse  small
 	let small = email.nextElementSibling;
 
-	//Regex pour valider Email
 	let emailRegExp = new RegExp(
 		'^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$',
 		'g',
 	);
 
 	let testEmail = emailRegExp.test(inputEmail.value);
-	// Test Regex
+
 	if (testEmail) {
 		small.innerHTML = "L'adresse électronique est valide.";
 		small.classList.remove('text-failed');
@@ -85,56 +74,62 @@ const validEmail = (inputEmail) => {
 	}
 };
 //  Ecoute de l'Email
-form.email.addEventListener('change', function () {
+email.addEventListener('change', function () {
 	validEmail(this);
 });
 
-//********* Date de naissance ********/
+//*********************** validation de date de naissance ***********************/
+const isBirthdayValid = () => {
+	let inputBirthday = document.getElementById('birthdate').value;
 
-const validityDate = () => {
-	if (!isBirthdatez == true) {
-		buttonSubmit.disabled = false;
-		first.setCustomValidity('Vous devez entrer votre date de naissance.');
-		alert('05');
+	if (inputBirthday == '') {
+		birthday.setCustomValidity('Vous devez entrer votre date de naissance.');
+		alert('Vous devez entrer votre date de naissance.');
+		console.log('birthday false');
+		return false;
 	} else {
-		buttonSubmit.disabled = true;
+		console.log('birthday true');
+		return true;
 	}
 };
 
-form.birthdate.addEventListener('change', function () {
-	validityDate(this);
-});
+birthday.addEventListener('change', isBirthdayValid);
+birthday.addEventListener('blur', isBirthdayValid);
 
-// ***********   Checkbox    ***********
+//************** validation de condtions d'utilisations****************************/
 
-checkbox1.addEventListener('click', function (event) {
-	isValidCheckBox = checkbox1.checkValidity();
-	if (isValidCheckBox) {
-		alert('false');
-		return false;
+const checkboxstart = checkbox1.checkValidity();
+// if (checkboxstart === false) {
+// 	alert('Vous devez vérifier que vous acceptez les termes et conditions.');
+// 	return false;
+// } else {
+// 	console.log('true');
+// 	return true;
+// }
+
+const ischecboxValid = () => {
+	if (checkbox1.checked) {
+		return true;
 	} else {
-		alert('true');
-		return 'true';
+		alert('Vous devez vérifier que vous acceptez les termes et conditions.');
+		return false;
 	}
-});
+};
 
-//****** Validation formulaire *******
+checkbox1.addEventListener('click', ischecboxValid);
 
+//******* Validation de formulaire *********/
+let form = document.querySelector('#form');
 form.addEventListener('submit', function (e) {
 	e.preventDefault();
-	buttonSubmit.disabled = false;
+	console.log(lastName.value);
 
 	if (
-		isFirstValid &&
-		isLastValid &&
-		validEmail === true &&
-		isBirthdatez &&
-		isQuantity &&
-		isValidCheckBox &&
-		isValidDate
+		(isLastNameValid && validEmail && isBirthdayValid && ischecboxValid) ||
+		checkboxstart
 	) {
-		buttonSubmit.disabled = true;
 		form.submit();
-		alert('Merci ! Votre réservation a été reçue.');
+	} else {
+		e.preventDefault();
 	}
 });
