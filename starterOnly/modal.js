@@ -129,7 +129,10 @@ form.addEventListener('submit', function (e) {
 		checkboxstart
 	) {
 		form.submit();
+		alert('Merci ! Votre réservation a été reçue.');
+		console.log('ok');
 	} else {
 		e.preventDefault();
+		console.log('reccommence');
 	}
 });
