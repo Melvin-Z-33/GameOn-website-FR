@@ -20,11 +20,13 @@ function launchModal() {
 	modalbg.style.display = 'block';
 }
 
-let modalClose = document.getElementById('fermer');
+//close modal form
+let modalClose = document.getElementById('close');
 modalClose.addEventListener('click', function () {
 	modalbg.style.display = 'none';
 });
 
+// FORM Elements
 const firstName = document.getElementById('first');
 const lastName = document.getElementById('last');
 const email = document.getElementById('email');
@@ -99,14 +101,6 @@ birthday.addEventListener('blur', isBirthdayValid);
 //************** validation de condtions d'utilisations****************************/
 
 const checkboxstart = checkbox1.checkValidity();
-// if (checkboxstart === false) {
-// 	alert('Vous devez vérifier que vous acceptez les termes et conditions.');
-// 	return false;
-// } else {
-// 	console.log('true');
-// 	return true;
-// }
-
 const ischecboxValid = () => {
 	if (checkbox1.checked) {
 		return true;
