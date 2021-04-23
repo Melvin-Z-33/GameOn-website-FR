@@ -1,119 +1,132 @@
-
-
 function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
+	var x = document.getElementById('myTopnav');
+	if (x.className === 'topnav') {
+		x.className += ' responsive';
+	} else {
+		x.className = 'topnav';
+	}
 }
 
 // DOM Elements
-const modalbg = document.querySelector(".bground");
-const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
+const modalbg = document.querySelector('.bground');
+const modalBtn = document.querySelectorAll('.modal-btn');
+const formData = document.querySelectorAll('.formData');
 
 // launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+modalBtn.forEach((btn) => btn.addEventListener('click', launchModal));
 
 // launch modal form
 function launchModal() {
-  modalbg.style.display = "block";
+	modalbg.style.display = 'block';
 }
 
+//close modal form
+let modalClose = document.getElementById('close');
+modalClose.addEventListener('click', function () {
+	modalbg.style.display = 'none';
+});
 
-// //  Message validation du prenom
-// const inputFirstName = document.getElementById('first');
-// inputFirstName.setCustomValidity('ok');
-const isValidFirstname =  first.checkValidity();
+// FORM Elements
+const firstName = document.getElementById('first');
+const lastName = document.getElementById('last');
+const email = document.getElementById('email');
+const birthday = document.getElementById('birthdate');
+const buttonSubmit = document.getElementById('buttonSubmit');
+const checkbox1 = document.getElementById('checkbox1');
 
-if(isValidFirstname){
-  console.log('ok');
-}else {
-  console.log('restart')
+//******* Verification du Nom *****************/
+function isLastNameValid() {
+	let inputLastName = document.getElementById('last').value;
+
+	if (inputLastName.length < 2) {
+		lastName.setCustomValidity(
+			'Veuillez entrer 2 caractères ou plus pour le champ du nom.',
+		);
+		return false;
+	} else {
+		return true;
+	}
 }
 
+lastName.addEventListener('change', isLastNameValid);
 
-// Message validation du nom
-const LastName = document.getElementById('last');
+//******************* Verification de l'email  ****************/
 
+const validEmail = (inputEmail) => {
+	// Recuperation de la balisse  small
+	let small = email.nextElementSibling;
 
+	let emailRegExp = new RegExp(
+		'^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$',
+		'g',
+	);
 
+	let testEmail = emailRegExp.test(inputEmail.value);
 
+	if (testEmail) {
+		small.innerHTML = "L'adresse électronique est valide.";
+		small.classList.remove('text-failed');
+		small.classList.add('text-success');
+		return true;
+	} else {
+		small.innerHTML = "L'adresse électronique n 'est pas valide.";
+		small.classList.remove('text-success');
+		small.classList.add('text-failed');
+		return false;
+	}
+};
+//  Ecoute de l'Email
+email.addEventListener('change', function () {
+	validEmail(this);
+});
 
+//*********************** validation de date de naissance ***********************/
+const isBirthdayValid = () => {
+	let inputBirthday = document.getElementById('birthdate').value;
 
-
-
-
-
-
-   
-
-
-
-
-
-
-// ******** Validation Email *********/
-
- const validEmail = function(inputEmail) {
-
-  // Recuperation de la balisse  small
-  let email = document.getElementById('email');
-  let small = email.nextElementSibling;
-
-  //Regex pour valider Email
-  let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g');
- 
-  let testEmail =  emailRegExp.test(inputEmail.value);
-  // Test Regex
-  
-  if (testEmail) {
-      small.innerHTML = 'L\'adresse électronique est valide.';
-      small.classList.remove('text-failed');
-      small.classList.add('text-success');
-
-  }
-  else
-  {
-    small.innerHTML ='L\'adresse électronique n \'est pas valide.';
-    small.classList.remove('text-success');
-    small.classList.add('text-failed');
-  }
+	if (inputBirthday == '') {
+		birthday.setCustomValidity('Vous devez entrer votre date de naissance.');
+		alert('Vous devez entrer votre date de naissance.');
+		console.log('birthday false');
+		return false;
+	} else {
+		console.log('birthday true');
+		return true;
+	}
 };
 
+birthday.addEventListener('change', isBirthdayValid);
+birthday.addEventListener('blur', isBirthdayValid);
 
+//************** validation de condtions d'utilisations****************************/
 
-//  Ecoute de l'Email
-let form = document.querySelector('#formReservation'); //Recuperer le formulaire pour pouvoir y ajouter des methodes et agir sur les inputs
- form.email.addEventListener('change', function(){
-   validEmail(this);
- });
+const checkboxstart = checkbox1.checkValidity();
+const ischecboxValid = () => {
+	if (checkbox1.checked) {
+		return true;
+	} else {
+		alert('Vous devez vérifier que vous acceptez les termes et conditions.');
+		return false;
+	}
+};
 
+checkbox1.addEventListener('click', ischecboxValid);
 
-// button.addEventListener('click',function(){
-//   let test = email.value;
-//   alert(test)
-// });     
+//******* Validation de formulaire *********/
+let form = document.querySelector('#form');
+form.addEventListener('submit', function (e) {
+	e.preventDefault();
+	console.log(lastName.value);
 
-
-
-
-/**
- *  soumission du formulaire
- *  1)ecouter la soumission
- * form.addEventListener('submit', function(e){
- * 
- *  2) bloquer la propagation
- * e.preventDefault();
- * 4) si toutes les conditions sont bonnes envoyeer le formulaire
- * if(validFirst(form.first) && validLast(form.last) &&  validEmail(form.email) && validDate(form.Date) && validQuantity(form.quantity) &&  ){
-    form.submit();
-  }
+	if (
+		(isLastNameValid && validEmail && isBirthdayValid && ischecboxValid) ||
+		checkboxstart
+	) {
+		form.submit();
+		alert('Merci ! Votre réservation a été reçue.');
+		console.log('ok');
+	} else {
+		e.preventDefault();
+		console.log('reccommence');
+	}
 });
- * 
- * 
- */
-
-
