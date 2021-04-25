@@ -101,7 +101,7 @@ birthday.addEventListener('blur', isBirthdayValid);
 //************** validation de condtions d'utilisations****************************/
 
 const checkboxstart = checkbox1.checkValidity();
-const ischecboxValid = () => {
+const ischeckBoxValid = () => {
 	if (checkbox1.checked) {
 		return true;
 	} else {
@@ -110,7 +110,7 @@ const ischecboxValid = () => {
 	}
 };
 
-checkbox1.addEventListener('click', ischecboxValid);
+checkbox1.addEventListener('click', ischeckBoxValid);
 
 //******* Validation de formulaire *********/
 let form = document.querySelector('#form');
@@ -119,7 +119,7 @@ form.addEventListener('submit', function (e) {
 	console.log(lastName.value);
 
 	if (
-		(isLastNameValid && validEmail && isBirthdayValid && ischecboxValid) ||
+		(isLastNameValid && validEmail && isBirthdayValid && ischeckBoxValid) ||
 		checkboxstart
 	) {
 		form.submit();
