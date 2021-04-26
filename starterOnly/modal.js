@@ -33,10 +33,10 @@ const email = document.getElementById('email');
 const birthday = document.getElementById('birthdate');
 const buttonSubmit = document.getElementById('buttonSubmit');
 const checkbox1 = document.getElementById('checkbox1');
-
+let inputLastName = ' ';
 //******* Verification du Nom *****************/
 function isLastNameValid() {
-	let inputLastName = document.getElementById('last').value;
+	inputLastName = document.getElementById('last').value;
 
 	if (inputLastName.length < 2) {
 		lastName.setCustomValidity(
