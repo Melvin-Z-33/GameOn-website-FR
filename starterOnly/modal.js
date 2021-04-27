@@ -30,73 +30,133 @@ modalClose.addEventListener('click', function () {
 const firstName = document.getElementById('first');
 const lastName = document.getElementById('last');
 const email = document.getElementById('email');
+const quantite = document.getElementById('quantity');
 const birthday = document.getElementById('birthdate');
 const buttonSubmit = document.getElementById('buttonSubmit');
 const checkbox1 = document.getElementById('checkbox1');
-let inputLastName = ' ';
-//******* Verification du Nom *****************/
-function isLastNameValid() {
-	inputLastName = document.getElementById('last').value;
 
-	if (inputLastName.length < 2) {
-		lastName.setCustomValidity(
-			'Veuillez entrer 2 caractères ou plus pour le champ du nom.',
-		);
+//****************** Verification du prénom */
+
+const isFirstNameValid = () => {
+	// Recuperation de la balisse  small
+	let small = firstName.nextElementSibling;
+	inputFirstName = document.getElementById('first').value;
+
+	if (inputFirstName.length < 2) {
+		small.innerHTML = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';
+		small.classList.remove('text-success');
+		small.classList.add('text-failed');
+		firstName.closest('.formData').classList.add('error');
 		return false;
 	} else {
+		small.classList.remove('text-failed');
+		firstName.closest('.formData').classList.remove('error');
+		small.innerHTML = '';
 		return true;
 	}
-}
+};
+//  Ecoute du prénom
+firstName.addEventListener('change', function () {
+	isFirstNameValid(this);
+});
 
-lastName.addEventListener('change', isLastNameValid);
+firstName.addEventListener('blur', function () {
+	isFirstNameValid(this);
+});
+
+//******* Verification du Nom *****************/
+const isLastNameValid = () => {
+	// Recuperation de la balisse  small
+	let small = lastName.nextElementSibling;
+	let inputLastName = document.getElementById('last').value;
+
+	if (inputLastName.length < 2) {
+		small.innerHTML = 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
+		small.classList.remove('text-success');
+		small.classList.add('text-failed');
+		lastName.closest('.formData').classList.add('error');
+		return false;
+	} else {
+		small.classList.remove('text-failed');
+		lastName.closest('.formData').classList.remove('error');
+		small.innerHTML = '';
+		return true;
+	}
+};
+
+lastName.addEventListener('change', function () {
+	isLastNameValid(this);
+});
+lastName.addEventListener('blur', function () {
+	isLastNameValid(this);
+});
 
 //******************* Verification de l'email  ****************/
 
-const validEmail = (inputEmail) => {
-	// Recuperation de la balisse  small
-	let small = email.nextElementSibling;
-
+const isEmailValid = (inputEmail) => {
+	let small = document.getElementById('smallEmail');
 	let emailRegExp = new RegExp(
 		'^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$',
 		'g',
 	);
 
 	let testEmail = emailRegExp.test(inputEmail.value);
-
 	if (testEmail) {
 		small.innerHTML = "L'adresse électronique est valide.";
 		small.classList.remove('text-failed');
 		small.classList.add('text-success');
+
 		return true;
 	} else {
-		small.innerHTML = "L'adresse électronique n 'est pas valide.";
+		small.innerHTML = "L'adresse électronique n'est pas valide.";
 		small.classList.remove('text-success');
 		small.classList.add('text-failed');
+		email.closest('.formData').classList.add('error');
 		return false;
 	}
 };
 //  Ecoute de l'Email
 email.addEventListener('change', function () {
-	validEmail(this);
+	isEmailValid(this);
+});
+email.addEventListener('blur', function () {
+	isEmailValid(this);
 });
 
 //*********************** validation de date de naissance ***********************/
 const isBirthdayValid = () => {
 	let inputBirthday = document.getElementById('birthdate').value;
+	let small = birthday.nextElementSibling;
 
 	if (inputBirthday == '') {
-		birthday.setCustomValidity('Vous devez entrer votre date de naissance.');
-		alert('Vous devez entrer votre date de naissance.');
-		console.log('birthday false');
+		small.innerHTML = 'Vous devez entrer votre date de naissance.';
+		small.classList.remove('text-success');
+		small.classList.add('text-failed');
+		birthday.closest('.formData').classList.add('error');
 		return false;
 	} else {
-		console.log('birthday true');
+		small.classList.remove('text-failed');
+		birthday.closest('.formData').classList.remove('error');
+		small.innerHTML = '';
 		return true;
 	}
 };
 
 birthday.addEventListener('change', isBirthdayValid);
 birthday.addEventListener('blur', isBirthdayValid);
+
+// ******************  validation de partipation *****************
+const isQuantityValid = () => {
+	if (isNaN(quantite.value) || (quantite.value = '')) {
+		console.log('false');
+		return false;
+	} else {
+		console.log('chiffre ok');
+		return true;
+	}
+};
+quantite.addEventListener('change', isQuantityValid);
+quantite.addEventListener('blur', isQuantityValid);
 
 //************** validation de condtions d'utilisations****************************/
 
@@ -119,7 +179,11 @@ form.addEventListener('submit', function (e) {
 	console.log(lastName.value);
 
 	if (
-		(isLastNameValid && validEmail && isBirthdayValid && ischeckBoxValid) ||
+		(isFirstNameValid &&
+			isLastNameValid &&
+			isEmailValid &&
+			isBirthdayValid &&
+			ischeckBoxValid) ||
 		checkboxstart
 	) {
 		form.submit();

@@ -13,7 +13,7 @@
 /* Landing Page */
 
 body {
-  margin: 0;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   background-image: url("background.png");
@@ -39,6 +39,7 @@ img {
 
 .text-failed {
   color: red;
+  font-size: 12px;
 }
 
 
@@ -698,4 +699,10 @@ footer {
 
 #paraph-espace {
   height: 10px;
+}
+
+
+.error input,
+.error select {
+  border: 0.1em solid red;
 }

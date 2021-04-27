@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=DM+Sans"  rel="stylesheet"/>
   </head>
   <body>
+    <div class="container">
     <div class="topnav" id="myTopnav">
       <div class="header-logo">
         <img alt="logo" src="Logo.png" width="auto" height="auto" />
@@ -68,6 +69,7 @@
                   value=''
                   required
                 />
+                <small></small>
                 <br>
               </div>
               <div class="formData">
@@ -81,7 +83,9 @@
                   pattern="[A-Za-z0-9]+"
                   value
                   required
-                /><br>
+                />
+                <small></small>
+                <br>
               </div>
               <div class="formData">
                 <label for="email">E-mail</label><br>
@@ -91,7 +95,8 @@
                   id="email"
                   name="email"
                   required
-                /><small id='emailvalidtext'></small>
+                />
+                <small id="smallEmail"></small>
                 <br>
               </div>
               <div class="formData">
@@ -102,8 +107,10 @@
                   id="birthdate"
                   name="birthdate"
                   required
-                /><br>
+                />
+                <small></small>
               </div>
+              <br>
               <div class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" required>
@@ -209,6 +216,7 @@
         Copyright 2014 - 2020, GameOn Inc.
       </p>
     </footer>
+  </div>
     <script src="modal.js"></script>
   </body>
 </html>
