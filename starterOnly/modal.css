@@ -120,7 +120,16 @@ img {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
+
 }
+
+/*********** AJOUT ********/
+.topnav a:hover span,
+.topnav a.active span {
+  border-bottom: 1.7px solid white;
+}
+
+/************************* *****/
 
 .topnav .icon {
   display: none;
@@ -550,7 +559,7 @@ input[data-error]::after {
   height: 100%;
   background: #232323;
   position: absolute;
-  right: -80px;
+  right: -32px;
   top: 0;
 }
 
@@ -560,20 +569,22 @@ input[data-error]::after {
 }
 
 .hero-headline {
-  font-size: 5.1rem;
-  font-weight: normal;
+  font-size: 4.8rem;
+  font-weight: bolder;
   white-space: nowrap;
   /* ****** ajout*** */
   text-align: center;
-
+  margin-top: 40px;
   /* ******* */
 }
 
 .hero-text {
-  width: 146%;
-  font-weight: normal;
+  width: 128%;
+  font-weight: initial;
   margin-top: 57px;
   padding: 0;
+  text-align: initial;
+  font-size: 19px;
 }
 
 .btn-signup {
@@ -602,6 +613,7 @@ input[data-error]::after {
   font-size: 1rem;
   margin: 60px 0 30px;
   font-weight: bolder;
+  transform: translateX(-4%);
 }
 
 .hero-section>.btn-signup {
@@ -681,4 +693,9 @@ footer {
   to {
     opacity: 1;
   }
+}
+
+
+#paraph-espace {
+  height: 10px;
 }
