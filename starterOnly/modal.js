@@ -147,12 +147,19 @@ birthday.addEventListener('blur', isBirthdayValid);
 
 // ******************  validation de partipation *****************
 const isQuantityValid = () => {
-	quantite = document.getElementById('quantity');
-	if (isNaN(quantite.value) || (quantite.value = '')) {
-		console.log('false');
+	const quantityValidity = quantite.checkValidity();
+	let small = quantite.nextElementSibling;
+
+	if (!quantityValidity) {
+		small.innerHTML = 'Vous devez entrer un chiiffre entre 0 et 99.';
+		small.classList.remove('text-success');
+		small.classList.add('text-failed');
+		quantite.closest('.formData').classList.add('error');
 		return false;
 	} else {
-		console.log('chiffre ok');
+		small.classList.remove('text-failed');
+		quantite.closest('.formData').classList.remove('error');
+		small.innerHTML = '';
 		return true;
 	}
 };
@@ -173,9 +180,7 @@ const ischeckBoxValid = () => {
 	} else {
 		small.innerHTML =
 			'Vous devez vérifier que vous acceptez les termes et conditions.';
-
 		box1.style.border = '2px solid red';
-
 		return false;
 	}
 };
