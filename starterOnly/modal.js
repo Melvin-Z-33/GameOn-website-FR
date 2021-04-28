@@ -147,6 +147,7 @@ birthday.addEventListener('blur', isBirthdayValid);
 
 // ******************  validation de partipation *****************
 const isQuantityValid = () => {
+	quantite = document.getElementById('quantity');
 	if (isNaN(quantite.value) || (quantite.value = '')) {
 		console.log('false');
 		return false;
@@ -162,15 +163,25 @@ quantite.addEventListener('blur', isQuantityValid);
 
 const checkboxstart = checkbox1.checkValidity();
 const ischeckBoxValid = () => {
+	let small = document.getElementById('agreementText');
+	const box1 = document.getElementById('box1');
+
 	if (checkbox1.checked) {
+		small.innerHTML = '';
+		box1.style.border = 'none';
 		return true;
 	} else {
-		alert('Vous devez vérifier que vous acceptez les termes et conditions.');
+		small.innerHTML =
+			'Vous devez vérifier que vous acceptez les termes et conditions.';
+
+		box1.style.border = '2px solid red';
+
 		return false;
 	}
 };
 
 checkbox1.addEventListener('click', ischeckBoxValid);
+checkbox1.addEventListener('blur', ischeckBoxValid);
 
 //******* Validation de formulaire *********/
 let form = document.querySelector('#form');
