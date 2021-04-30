@@ -32,6 +32,7 @@ const lastName = document.getElementById('last');
 const email = document.getElementById('email');
 const quantite = document.getElementById('quantity');
 const birthday = document.getElementById('birthdate');
+
 const buttonSubmit = document.getElementById('buttonSubmit');
 const checkbox1 = document.getElementById('checkbox1');
 
@@ -124,12 +125,21 @@ email.addEventListener('blur', function () {
 });
 
 //*********************** validation de date de naissance ***********************/
+const today = new Date().toISOString().split('T')[0];
+birthday.max = today; // locks the calendar to the current date
+
 const isBirthdayValid = () => {
 	let inputBirthday = document.getElementById('birthdate').value;
 	let small = birthday.nextElementSibling;
 
 	if (inputBirthday == '') {
 		small.innerHTML = 'Vous devez entrer votre date de naissance.';
+		small.classList.remove('text-success');
+		small.classList.add('text-failed');
+		birthday.closest('.formData').classList.add('error');
+		return false;
+	} else if (inputBirthday > today) {
+		small.innerHTML = 'Vous devez entrer une date de naissance valide.';
 		small.classList.remove('text-success');
 		small.classList.add('text-failed');
 		birthday.closest('.formData').classList.add('error');
@@ -145,13 +155,41 @@ const isBirthdayValid = () => {
 birthday.addEventListener('change', isBirthdayValid);
 birthday.addEventListener('blur', isBirthdayValid);
 
+const calculateAgeUser = () => {
+	const birthdayUser = new Date(birthdate.value).toISOString().split('T')[0];
+	const convertToday = Date.parse(today);
+	const convertbirthdayUser = Date.parse(birthdayUser);
+	let small = birthday.nextElementSibling;
+
+	let diffTime = Math.abs(convertToday - convertbirthdayUser);
+	let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+	console.log(diffDays);
+
+	if (diffDays < 6570) {
+		small.innerHTML = "Vous n'êtes pas majeur.";
+		small.classList.remove('text-success');
+		small.classList.add('text-failed');
+		birthday.closest('.formData').classList.add('error');
+		return false;
+	} else {
+		small.innerHTML = 'Vous êtes  majeur \ud83d\ude0a. ';
+		small.classList.remove('text-failed');
+		small.classList.add('text-success');
+		birthday.closest('.formData').classList.add('error');
+		return true;
+	}
+};
+
+birthday.addEventListener('change', calculateAgeUser);
+birthday.addEventListener('blur', calculateAgeUser);
 // ******************  validation de partipation *****************
 const isQuantityValid = () => {
 	const quantityValidity = quantite.checkValidity();
 	let small = quantite.nextElementSibling;
 
 	if (!quantityValidity) {
-		small.innerHTML = 'Vous devez entrer un chiiffre entre 0 et 99.';
+		small.innerHTML = 'Vous devez entrer un chiffre entre 0 et 99.';
 		small.classList.remove('text-success');
 		small.classList.add('text-failed');
 		quantite.closest('.formData').classList.add('error');
@@ -165,6 +203,27 @@ const isQuantityValid = () => {
 };
 quantite.addEventListener('change', isQuantityValid);
 quantite.addEventListener('blur', isQuantityValid);
+
+//********  validation de ville ***********/
+
+function validate() {
+	let valid = false;
+	let x = document.form.location;
+
+	for (var i = 0; i < x.length; i++) {
+		if (x[i].checked) {
+			valid = true;
+			break;
+		}
+	}
+
+	if (valid) {
+		alert('Validation succes');
+	} else {
+		alert('please select a mode of payment');
+		return false;
+	}
+}
 
 //************** validation de condtions d'utilisations****************************/
 
@@ -193,12 +252,12 @@ let form = document.querySelector('#form');
 form.addEventListener('submit', function (e) {
 	e.preventDefault();
 	console.log(lastName.value);
-
 	if (
 		(isFirstNameValid &&
 			isLastNameValid &&
 			isEmailValid &&
 			isBirthdayValid &&
+			calculateAgeUser &&
 			ischeckBoxValid) ||
 		checkboxstart
 	) {
