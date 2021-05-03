@@ -32,7 +32,6 @@ const lastName = document.getElementById('last');
 const email = document.getElementById('email');
 const quantite = document.getElementById('quantity');
 const birthday = document.getElementById('birthdate');
-
 const buttonSubmit = document.getElementById('buttonSubmit');
 const checkbox1 = document.getElementById('checkbox1');
 
@@ -173,10 +172,10 @@ const calculateAgeUser = () => {
 		birthday.closest('.formData').classList.add('error');
 		return false;
 	} else {
-		small.innerHTML = 'Vous êtes  majeur \ud83d\ude0a. ';
+		small.innerHTML = 'Vous êtes  majeur. \ud83d\ude0a';
 		small.classList.remove('text-failed');
 		small.classList.add('text-success');
-		birthday.closest('.formData').classList.add('error');
+		birthday.closest('.formData').classList.remove('error');
 		return true;
 	}
 };
@@ -204,26 +203,27 @@ const isQuantityValid = () => {
 quantite.addEventListener('change', isQuantityValid);
 quantite.addEventListener('blur', isQuantityValid);
 
-//********  validation de ville ***********/
+// //********  validation de ville ***********/
+// let ville = document.getElementsByClassName('location');
 
-function validate() {
-	let valid = false;
-	let x = document.form.location;
+// function validate() {
+// 	let valid = false;
 
-	for (var i = 0; i < x.length; i++) {
-		if (x[i].checked) {
-			valid = true;
-			break;
-		}
-	}
+// 	for (let i = 0; i < ville.length; i++) {
+// 		if (ville[i].checked) {
+// 			valid = true;
+// 			break;
+// 		}
+// 	}
 
-	if (valid) {
-		alert('Validation succes');
-	} else {
-		alert('please select a mode of payment');
-		return false;
-	}
-}
+// 	if (valid) {
+// 		console.log('ok');
+// 	} else {
+// 		console.log('please select a mode of payment');
+// 		return false;
+// 	}
+// }
+// ville.addEventListener('change', validate);
 
 //************** validation de condtions d'utilisations****************************/
 
@@ -248,10 +248,38 @@ checkbox1.addEventListener('click', ischeckBoxValid);
 checkbox1.addEventListener('blur', ischeckBoxValid);
 
 //******* Validation de formulaire *********/
-let form = document.querySelector('#form');
-form.addEventListener('submit', function (e) {
+let form = document.getElementById('form');
+let elt = document.getElementsByClassName('formData');
+let text = document.getElementById('text-final');
+
+/************************ changement de format ***********************/
+
+const hideInput = () => {
+	let locationQuestion = document.getElementById('locationQuestion');
+	locationQuestion.classList.add('invisible');
+	text.style.visibility = 'visible';
+	text.classList.add('visible');
+	buttonSubmit.value = 'Close';
+
+	console.log(text);
+
+	console.log(formData);
+	for (let i = 0; i < formData.length; i++) {
+		formData.item(i).classList.add('invisible');
+	}
+};
+
+buttonSubmit.addEventListener('click', hideInput);
+/** */
+
+buttonSubmit.addEventListener('click', ischeckBoxValid);
+
+form.onsubmit = (e) => {
+	let col = document.getElementById('location1');
+
 	e.preventDefault();
-	console.log(lastName.value);
+	col.style.color = 'red';
+
 	if (
 		(isFirstNameValid &&
 			isLastNameValid &&
@@ -261,11 +289,19 @@ form.addEventListener('submit', function (e) {
 			ischeckBoxValid) ||
 		checkboxstart
 	) {
-		form.submit();
-		alert('Merci ! Votre réservation a été reçue.');
 		console.log('ok');
-	} else {
+		console.log(elt);
+		modalbg.style.display = 'block';
+		// formClass.classList.add('anotherclass');
+		// formClass.style.visibility = 'hidden';
+		text.style.visibility = 'visible';
+		// alert('oki');
+		window.stop();
+		location.reload(false);
 		e.preventDefault();
+	} else {
 		console.log('reccommence');
+		alert('recoomence');
+		submit.preventDefault();
 	}
-});
+};

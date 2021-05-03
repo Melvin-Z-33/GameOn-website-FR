@@ -20,7 +20,7 @@ body {
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
-  margin: 0 auto;
+
 }
 
 p {
@@ -716,4 +716,34 @@ footer {
   margin-left: 2.5rem;
   margin-bottom: -1.5rem;
 
+}
+
+
+
+/* .formData,
+.text-label {
+  visibility: hidden;
+} */
+
+
+#text-final {
+  width: 100%;
+  height: 60%;
+  display: block;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 50% 19%;
+  text-align: center;
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 47px;
+  visibility: hidden;
+
+}
+
+.invisible {
+  visibility: hidden;
 }
