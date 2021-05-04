@@ -160,14 +160,17 @@ const calculateAgeUser = () => {
 	const convertToday = Date.parse(today);
 	const convertbirthdayUser = Date.parse(birthdayUser);
 	let small = birthday.nextElementSibling;
-
 	let diffTime = Math.abs(convertToday - convertbirthdayUser);
 	let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-	console.log(diffDays);
-
 	if (diffDays < 6570) {
 		small.innerHTML = "Vous n'êtes pas majeur.";
+		small.classList.remove('text-success');
+		small.classList.add('text-failed');
+		birthday.closest('.formData').classList.add('error');
+		return false;
+	} else if (diffDays > 54750) {
+		small.innerHTML = 'Tu as plus de 150 ans!?';
 		small.classList.remove('text-success');
 		small.classList.add('text-failed');
 		birthday.closest('.formData').classList.add('error');
@@ -183,6 +186,7 @@ const calculateAgeUser = () => {
 
 birthday.addEventListener('change', calculateAgeUser);
 birthday.addEventListener('blur', calculateAgeUser);
+
 // ******************  validation de partipation *****************
 const isQuantityValid = () => {
 	const quantityValidity = quantite.checkValidity();
