@@ -46,8 +46,6 @@ img {
 .topnav {
   overflow: hidden;
   margin: 3.5%;
-
-  /* ***  AJOUT   *** */
   display: flex;
   align-content: center;
   justify-content: space-between;
@@ -81,9 +79,6 @@ img {
     flex-wrap: wrap;
   }
 
-
-
-
   .topnav a {
     display: flex;
     align-content: unset;
@@ -91,7 +86,6 @@ img {
     flex-direction: column;
     justify-content: center;
   }
-
 }
 
 @media screen and (min-width: 1110px) {
@@ -100,7 +94,6 @@ img {
     display: flex;
   }
 }
-
 
 .topnav a {
   float: left;
@@ -128,13 +121,10 @@ img {
 
 }
 
-/*********** AJOUT ********/
 .topnav a:hover span,
 .topnav a.active span {
   border-bottom: 1.7px solid white;
 }
-
-/************************* *****/
 
 .topnav .icon {
   display: none;
@@ -146,12 +136,12 @@ img {
   }
 
   .topnav a.icon {
-    /* float: right; */
     display: block;
     position: absolute;
     right: 4.8%;
     color: red;
     font-size: 25px;
+    padding: 0;
   }
 }
 
@@ -197,10 +187,9 @@ img {
     float: right;
     display: block;
     margin-top: 7px;
+    padding: 0px;
   }
-
 }
-
 
 main {
   font-size: 130%;
@@ -212,8 +201,6 @@ main {
   margin: 1px 20px 15px;
   border-radius: 2rem;
   text-align: justify;
-
-
 }
 
 .modal-btn {
@@ -277,7 +264,6 @@ main {
 
 
 }
-
 
 
 .content {
@@ -587,7 +573,7 @@ input[data-error]::after {
 }
 
 .hero-headline {
-  font-size: 4.8rem;
+  font-size: 5.1rem;
   font-weight: bolder;
   white-space: nowrap;
   /* ****** ajout*** */
@@ -673,6 +659,11 @@ footer {
   /* *******  AJOUT ****** */
 
   @media screen and (max-width: 468px) {
+
+    .hero-section {
+      margin-bottom: -66px;
+    }
+
     .hero-content {
       padding: 30px 0;
     }
@@ -680,7 +671,7 @@ footer {
 
     .hero-headline {
       font-size: 2.8rem;
-      font-weight: 1000;
+      font-weight: 900;
       text-align: center;
       margin-top: -17px;
       width: 100%;
@@ -695,9 +686,15 @@ footer {
     }
   }
 
+  .copyrights {
+    font-size: 0.7rem;
+  }
+
   /* ****************** */
 
   @media screen and (min-width: 469px) {
+
+
     .hero-text {
       width: 100%;
       font-size: 1.5rem;
