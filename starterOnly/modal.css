@@ -13,14 +13,14 @@
 /* Landing Page */
 
 body {
-  margin: 0;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   background-image: url("background.png");
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
-  margin: 0 auto;
+
 }
 
 p {
@@ -39,14 +39,13 @@ img {
 
 .text-failed {
   color: red;
+  font-size: 12px;
 }
 
 
 .topnav {
   overflow: hidden;
   margin: 3.5%;
-
-  /* ***  AJOUT   *** */
   display: flex;
   align-content: center;
   justify-content: space-between;
@@ -87,7 +86,6 @@ img {
     flex-direction: column;
     justify-content: center;
   }
-
 }
 
 @media screen and (min-width: 1110px) {
@@ -96,7 +94,6 @@ img {
     display: flex;
   }
 }
-
 
 .topnav a {
   float: left;
@@ -110,10 +107,11 @@ img {
   font-family: Roboto, sans-serif;
 }
 
-.topnav a:hover {
+.topnav a:not(.icon):hover {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
+  transition: 0.5s;
 }
 
 .topnav a.active {
@@ -123,13 +121,10 @@ img {
 
 }
 
-/*********** AJOUT ********/
 .topnav a:hover span,
 .topnav a.active span {
   border-bottom: 1.7px solid white;
 }
-
-/************************* *****/
 
 .topnav .icon {
   display: none;
@@ -141,10 +136,12 @@ img {
   }
 
   .topnav a.icon {
-    /* float: right; */
     display: block;
     position: absolute;
     right: 4.8%;
+    color: red;
+    font-size: 25px;
+    padding: 0;
   }
 }
 
@@ -158,6 +155,7 @@ img {
     position: absolute;
     right: 0;
     top: 0;
+
   }
 
   .topnav.responsive a {
@@ -189,10 +187,9 @@ img {
     float: right;
     display: block;
     margin-top: 7px;
+    padding: 0px;
   }
-
 }
-
 
 main {
   font-size: 130%;
@@ -204,8 +201,6 @@ main {
   margin: 1px 20px 15px;
   border-radius: 2rem;
   text-align: justify;
-
-
 }
 
 .modal-btn {
@@ -261,6 +256,15 @@ main {
   overflow: auto;
   background-color: rgba(26, 39, 156, 0.4);
 }
+
+@media (min-width: 319px) and (max-width: 495px) {
+  .bground {
+    padding-top: 68px;
+  }
+
+
+}
+
 
 .content {
   margin: 5% auto;
@@ -569,7 +573,7 @@ input[data-error]::after {
 }
 
 .hero-headline {
-  font-size: 4.8rem;
+  font-size: 5.1rem;
   font-weight: bolder;
   white-space: nowrap;
   /* ****** ajout*** */
@@ -654,17 +658,47 @@ footer {
 
   /* *******  AJOUT ****** */
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 468px) {
+
+    .hero-section {
+      margin-bottom: -66px;
+    }
+
+    .hero-content {
+      padding: 30px 0;
+    }
+
+
     .hero-headline {
-      font-size: 3.5rem;
+      font-size: 2.8rem;
+      font-weight: 900;
       text-align: center;
+      margin-top: -17px;
+      width: 100%;
+    }
+
+    .hero-text {
+      width: 100%;
+      text-align: left;
+      font-size: 12px;
+      margin-top: 20px;
+      margin-bottom: -36px;
     }
   }
 
+  .copyrights {
+    font-size: 0.7rem;
+  }
+
   /* ****************** */
-  .hero-text {
-    width: unset;
-    font-size: 1.5rem;
+
+  @media screen and (min-width: 469px) {
+
+
+    .hero-text {
+      width: 100%;
+      font-size: 1.5rem;
+    }
   }
 
   .hero-img img {
@@ -698,4 +732,69 @@ footer {
 
 #paraph-espace {
   height: 10px;
+
+}
+
+
+.error input,
+.error select {
+  border: 0.1em solid red;
+}
+
+
+#agreementText {
+  display: block;
+  color: red;
+  font-size: 12px;
+  margin-left: 2.5rem;
+  margin-bottom: -1.5rem;
+
+}
+
+
+
+/* .formData,
+.text-label {
+  visibility: hidden;
+} */
+
+
+#text-final {
+  width: 100%;
+  height: 60%;
+  display: block;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 50% 19%;
+  text-align: center;
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 47px;
+  visibility: hidden;
+}
+
+@media (max-width: 376px) {
+  #text-final {
+    padding: 50% 5%;
+  }
+
+}
+
+@media (min-width: 377px) and (max-width: 499px) {
+  #text-final {
+    padding: 50% 9%;
+  }
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+@media (max-width: 765px) {
+  .header-logo img {
+    height: 33px;
+  }
 }
