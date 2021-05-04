@@ -26,7 +26,7 @@ modalClose.addEventListener('click', function () {
 	modalbg.style.display = 'none';
 });
 
-// FORM Elements
+// FORM variables
 const firstName = document.getElementById('first');
 const lastName = document.getElementById('last');
 const email = document.getElementById('email');
@@ -40,9 +40,11 @@ const checkbox1 = document.getElementById('checkbox1');
 const isFirstNameValid = () => {
 	// Recuperation de la balisse  small
 	let small = firstName.nextElementSibling;
-	inputFirstName = document.getElementById('first').value;
+	let inputFirstName = document.getElementById('first');
+	let firstNameRegExp = new RegExp('^[a-zA-Z0-9éêèï]{2,}$');
+	let testFirstNameRegExp = firstNameRegExp.test(inputFirstName.value);
 
-	if (inputFirstName.length < 2) {
+	if (!testFirstNameRegExp) {
 		small.innerHTML = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';
 		small.classList.remove('text-success');
 		small.classList.add('text-failed');
@@ -59,7 +61,6 @@ const isFirstNameValid = () => {
 firstName.addEventListener('change', function () {
 	isFirstNameValid(this);
 });
-
 firstName.addEventListener('blur', function () {
 	isFirstNameValid(this);
 });
@@ -240,6 +241,7 @@ const ischeckBoxValid = () => {
 		small.innerHTML =
 			'Vous devez vérifier que vous acceptez les termes et conditions.';
 		box1.style.border = '2px solid red';
+
 		return false;
 	}
 };
@@ -252,33 +254,18 @@ let form = document.getElementById('form');
 let elt = document.getElementsByClassName('formData');
 let text = document.getElementById('text-final');
 
-/************************ changement de format ***********************/
+//*TODO: ************************ changement de format ***********************/
 
-const hideInput = () => {
-	let locationQuestion = document.getElementById('locationQuestion');
-	locationQuestion.classList.add('invisible');
-	text.style.visibility = 'visible';
-	text.classList.add('visible');
-	buttonSubmit.value = 'Close';
+// buttonSubmit.addEventListener('click', add(2, 2));
 
-	console.log(text);
-
-	console.log(formData);
-	for (let i = 0; i < formData.length; i++) {
-		formData.item(i).classList.add('invisible');
-	}
-};
-
-buttonSubmit.addEventListener('click', hideInput);
-/** */
+//*TODO: ************************* ************************************ */
 
 buttonSubmit.addEventListener('click', ischeckBoxValid);
 
 form.onsubmit = (e) => {
-	let col = document.getElementById('location1');
-
+	// let col = document.getElementById('location1');
+	// col.style.color = 'red';
 	e.preventDefault();
-	col.style.color = 'red';
 
 	if (
 		(isFirstNameValid &&
