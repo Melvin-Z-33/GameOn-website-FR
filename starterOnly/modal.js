@@ -35,10 +35,8 @@ const birthday = document.getElementById('birthdate');
 const buttonSubmit = document.getElementById('buttonSubmit');
 const checkbox1 = document.getElementById('checkbox1');
 
-//****************** Verification du prénom */
-
+//****************** Verification du prénom ************/
 const isFirstNameValid = () => {
-	// Recuperation de la balisse  small
 	let small = firstName.nextElementSibling;
 	let inputFirstName = document.getElementById('first');
 	let firstNameRegExp = new RegExp('^[a-zA-Z0-9éêèï]{2,}$');
@@ -57,7 +55,6 @@ const isFirstNameValid = () => {
 		return true;
 	}
 };
-//  Ecoute du prénom
 firstName.addEventListener('change', function () {
 	isFirstNameValid(this);
 });
@@ -67,7 +64,6 @@ firstName.addEventListener('blur', function () {
 
 //******* Verification du Nom *****************/
 const isLastNameValid = () => {
-	// Recuperation de la balisse  small
 	let small = lastName.nextElementSibling;
 	let inputLastName = document.getElementById('last').value;
 
@@ -84,7 +80,6 @@ const isLastNameValid = () => {
 		return true;
 	}
 };
-
 lastName.addEventListener('change', function () {
 	isLastNameValid(this);
 });
@@ -93,7 +88,6 @@ lastName.addEventListener('blur', function () {
 });
 
 //******************* Verification de l'email  ****************/
-
 const isEmailValid = (inputEmail) => {
 	let small = document.getElementById('smallEmail');
 	let emailRegExp = new RegExp(
@@ -106,7 +100,7 @@ const isEmailValid = (inputEmail) => {
 		small.innerHTML = "L'adresse électronique est valide.";
 		small.classList.remove('text-failed');
 		small.classList.add('text-success');
-
+		email.closest('.formData').classList.remove('error');
 		return true;
 	} else {
 		small.innerHTML = "L'adresse électronique n'est pas valide.";
@@ -116,7 +110,7 @@ const isEmailValid = (inputEmail) => {
 		return false;
 	}
 };
-//  Ecoute de l'Email
+
 email.addEventListener('change', function () {
 	isEmailValid(this);
 });
@@ -126,7 +120,7 @@ email.addEventListener('blur', function () {
 
 //*********************** validation de date de naissance ***********************/
 const today = new Date().toISOString().split('T')[0];
-birthday.max = today; // locks the calendar to the current date
+birthday.max = today;
 
 const isBirthdayValid = () => {
 	let inputBirthday = document.getElementById('birthdate').value;
@@ -162,7 +156,7 @@ const calculateAgeUser = () => {
 	let small = birthday.nextElementSibling;
 	let diffTime = Math.abs(convertToday - convertbirthdayUser);
 	let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
+	console.log(diffDays);
 	if (diffDays < 6570) {
 		small.innerHTML = "Vous n'êtes pas majeur.";
 		small.classList.remove('text-success');
@@ -189,10 +183,11 @@ birthday.addEventListener('blur', calculateAgeUser);
 
 // ******************  validation de partipation *****************
 const isQuantityValid = () => {
-	const quantityValidity = quantite.checkValidity();
+	let ParticipationRegExp = new RegExp('^[0-9]{1,2}$');
+	let testParticipationRegExp = ParticipationRegExp.test(quantite.value);
 	let small = quantite.nextElementSibling;
 
-	if (!quantityValidity) {
+	if (!testParticipationRegExp) {
 		small.innerHTML = 'Vous devez entrer un chiffre entre 0 et 99.';
 		small.classList.remove('text-success');
 		small.classList.add('text-failed');
@@ -208,30 +203,22 @@ const isQuantityValid = () => {
 quantite.addEventListener('change', isQuantityValid);
 quantite.addEventListener('blur', isQuantityValid);
 
-// //********  validation de ville ***********/
-// let ville = document.getElementsByClassName('location');
+//********  validation de ville ***********/
+let citiesField = document.getElementById('citiesField');
 
-// function validate() {
-// 	let valid = false;
-
-// 	for (let i = 0; i < ville.length; i++) {
-// 		if (ville[i].checked) {
-// 			valid = true;
-// 			break;
-// 		}
-// 	}
-
-// 	if (valid) {
-// 		console.log('ok');
-// 	} else {
-// 		console.log('please select a mode of payment');
-// 		return false;
-// 	}
-// }
-// ville.addEventListener('change', validate);
+const isCitiesValid = () => {
+	let elts = document.getElementsByClassName('checkbox-input');
+	for (let i = 0; i < elts.length; i++) {
+		if (elts[i].checked === true) break;
+		console.log('true');
+		console.log('value => ' + elts[i].value);
+		return true;
+	}
+};
+citiesField.addEventListener('change', isCitiesValid);
+document.querySelector('form').addEventListener('onchange', isCitiesValid);
 
 //************** validation de condtions d'utilisations****************************/
-
 const checkboxstart = checkbox1.checkValidity();
 const ischeckBoxValid = () => {
 	let small = document.getElementById('agreementText');
@@ -249,50 +236,44 @@ const ischeckBoxValid = () => {
 		return false;
 	}
 };
-
 checkbox1.addEventListener('click', ischeckBoxValid);
 checkbox1.addEventListener('blur', ischeckBoxValid);
 
 //******* Validation de formulaire *********/
-let form = document.getElementById('form');
+const form = document.getElementById('form');
 let elt = document.getElementsByClassName('formData');
 let text = document.getElementById('text-final');
-
-//*TODO: ************************ changement de format ***********************/
-
-// buttonSubmit.addEventListener('click', add(2, 2));
-
-//*TODO: ************************* ************************************ */
 
 buttonSubmit.addEventListener('click', ischeckBoxValid);
 
 form.onsubmit = (e) => {
-	// let col = document.getElementById('location1');
-	// col.style.color = 'red';
 	e.preventDefault();
 
 	if (
-		(isFirstNameValid &&
-			isLastNameValid &&
-			isEmailValid &&
-			isBirthdayValid &&
-			calculateAgeUser &&
-			ischeckBoxValid) ||
+		isFirstNameValid &&
+		isLastNameValid &&
+		isEmailValid &&
+		isBirthdayValid &&
+		calculateAgeUser &&
+		isQuantityValid &&
+		isCitiesValid &&
+		ischeckBoxValid &&
 		checkboxstart
 	) {
-		console.log('ok');
-		console.log(elt);
-		modalbg.style.display = 'block';
-		// formClass.classList.add('anotherclass');
-		// formClass.style.visibility = 'hidden';
-		text.style.visibility = 'visible';
-		// alert('oki');
-		window.stop();
-		location.reload(false);
 		e.preventDefault();
+		{
+			console.log('ok');
+			for (let i = 0; i < formData.length; i++) {
+				formData.item(i).classList.add('invisible');
+				let text = document.getElementById('text-final');
+				let locationQuestion = document.getElementById('locationQuestion');
+				locationQuestion.classList.add('invisible');
+				text.style.visibility = 'visible';
+				text.classList.add('visible');
+				buttonSubmit.value = 'Close';
+			}
+		}
 	} else {
-		console.log('reccommence');
-		alert('recoomence');
-		submit.preventDefault();
+		console.log('recommence');
 	}
 };
