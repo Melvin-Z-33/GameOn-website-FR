@@ -261,23 +261,19 @@ form.onsubmit = (e) => {
 		checkboxstart
 	) {
 		e.preventDefault();
-
-		console.log('ok');
-		text.style.visibility = 'visible';
-		//modalbg.style.display = 'block';
-
-		// formClass.classList.add('anotherclass');
-		// formClass.style.visibility = 'hidden';
-		// alert('oki');
+		{
+			console.log('ok');
+			for (let i = 0; i < formData.length; i++) {
+				formData.item(i).classList.add('invisible');
+				let text = document.getElementById('text-final');
+				let locationQuestion = document.getElementById('locationQuestion');
+				locationQuestion.classList.add('invisible');
+				text.style.visibility = 'visible';
+				text.classList.add('visible');
+				buttonSubmit.value = 'Close';
+			}
+		}
 	} else {
-		console.log('reccommence');
-		alert('recoomence');
-		onsubmit.preventDefault();
+		console.log('recommence');
 	}
 };
-
-//*TODO: ************************ changement de format ***********************/
-
-// buttonSubmit.addEventListener('click', add(2, 2));
-
-//*TODO: ************************* ************************************ */
