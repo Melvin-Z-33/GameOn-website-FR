@@ -22,9 +22,11 @@ function launchModal() {
 
 //close modal form
 let modalClose = document.getElementById('close');
-modalClose.addEventListener('click', function () {
+
+const closeModal = () => {
 	modalbg.style.display = 'none';
-});
+};
+modalClose.addEventListener('click', closeModal);
 
 // FORM variables
 const firstName = document.getElementById('first');
@@ -246,7 +248,9 @@ let text = document.getElementById('text-final');
 
 buttonSubmit.addEventListener('click', ischeckBoxValid);
 
-form.onsubmit = (e) => {
+// form.onsubmit = (e) => {
+
+const send = (e) => {
 	e.preventDefault();
 
 	if (
@@ -257,8 +261,8 @@ form.onsubmit = (e) => {
 		calculateAgeUser &&
 		isQuantityValid &&
 		isCitiesValid &&
-		ischeckBoxValid &&
-		checkboxstart
+		ischeckBoxValid //&&
+		// checkboxstart
 	) {
 		e.preventDefault();
 		{
@@ -271,9 +275,12 @@ form.onsubmit = (e) => {
 				text.style.visibility = 'visible';
 				text.classList.add('visible');
 				buttonSubmit.value = 'Close';
+				buttonSubmit.addEventListener('click', closeModal);
 			}
 		}
 	} else {
 		console.log('recommence');
 	}
 };
+
+form.addEventListener('submit', send);

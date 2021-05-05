@@ -261,10 +261,7 @@ main {
   .bground {
     padding-top: 68px;
   }
-
-
 }
-
 
 .content {
   margin: 5% auto;
@@ -545,7 +542,6 @@ input[data-error]::after {
   min-width: 300px;
 }
 
-/* ********** ajout **********/
 @media screen and (max-width: 400px) {
 
   .hero-content {
@@ -554,7 +550,6 @@ input[data-error]::after {
   }
 }
 
-/* ********** */
 
 
 .hero-content::after {
@@ -576,10 +571,9 @@ input[data-error]::after {
   font-size: 5.1rem;
   font-weight: bolder;
   white-space: nowrap;
-  /* ****** ajout*** */
   text-align: center;
   margin-top: 40px;
-  /* ******* */
+
 }
 
 .hero-text {
@@ -628,6 +622,7 @@ footer {
   padding-left: 2vw;
   padding-right: 2vw;
   margin: 0 20px;
+  height: 0px;
 }
 
 @media screen and (max-width: 800px) {
@@ -690,7 +685,7 @@ footer {
     font-size: 0.7rem;
   }
 
-  /* ****************** */
+
 
   @media screen and (min-width: 469px) {
 
@@ -715,6 +710,8 @@ footer {
   .copyrights {
     margin-top: 50px;
     text-align: center;
+    height: 43px;
+
   }
 }
 
@@ -735,7 +732,6 @@ footer {
 
 }
 
-
 .error input,
 .error select {
   border: 0.1em solid red;
@@ -750,13 +746,6 @@ footer {
   margin-bottom: -1.5rem;
 
 }
-
-
-
-/* .formData,
-.text-label {
-  visibility: hidden;
-} */
 
 
 #text-final {
