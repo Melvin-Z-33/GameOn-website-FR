@@ -12,7 +12,7 @@
 		<link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet" />
 	</head>
 	<body>
-		<div class="container">
+		<header class="container">
 			<div class="topnav" id="myTopnav">
 				<div class="header-logo">
 					<img alt="logo" src="Logo.png" />
@@ -20,15 +20,15 @@
 				<a href="javascript:void(0);" class="icon" onclick="editNav()"
 					><i class="fa fa-bars"></i
 				></a>
-				<div class="main-navbar">
+				<nav class="main-navbar">
 					<!-- <a href="#" class="active"><span>Accueil</span></a> -->
 					<a href="#" class="active"><span>Event details</span></a>
 					<a href="#"><span>About us</span></a>
 					<a href="#"><span>Contact</span></a>
 					<a href="#"><span>Pass events</span></a>
-				</div>
+				</nav>
 			</div>
-		</div>
+		</header>
 		<main>
 			<div class="hero-section">
 				<div class="hero-content">
@@ -46,7 +46,7 @@
 				<div class="hero-img">
 					<img src="./bg_img.jpg" alt="img" />
 				</div>
-				<button class="btn-signup modal-btn">je m'inscris</button>
+				<button class="btn-signup modal-btn">Sign Up Now</button>
 			</div>
 			<div class="bground">
 				<div class="content">
@@ -249,7 +249,13 @@
 			</div>
 		</main>
 		<footer>
-			<p class="copyrights">Copyright 2014 - 2020, GameOn Inc.</p>
+			<p class="copyrights">
+				Copyright 2014-
+				<script>
+					document.write(new Date().getFullYear());
+				</script>
+				, GameOn Inc.
+			</p>
 		</footer>
 		<script src="modal.js"></script>
 	</body>
